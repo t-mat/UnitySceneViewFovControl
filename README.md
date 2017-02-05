@@ -4,6 +4,9 @@
 |--------------------		|-------------------------		|
 |![WideFov](images/WideFov.png)	|![NarrowFov](images/NarrowFov.png)	|
 
+Unity Editor のシーンビュー (Scene View) に対する不満の１つとして、 FoV (画角) が操作できないことがしばしば挙げられます。
+この Unity Editor 拡張は、 Unity Editor の非公開 API を用いて、その不満の一部を解消するものです。
+
 
 ## 使い方
 
