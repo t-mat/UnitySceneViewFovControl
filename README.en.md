@@ -1,6 +1,4 @@
-﻿[日本語はこちら / Japanese](README.ja.md)
-
-# Unity Scene FoV Control
+﻿# Unity Scene FoV Control
 
 Unity Editor Extension which enables controlling Scene View's FoV.
 
