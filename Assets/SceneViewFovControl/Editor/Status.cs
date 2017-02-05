@@ -15,6 +15,10 @@ class Status {
             return;
         }
 
+        if(sceneView.in2DMode) {
+            return;
+        }
+
         Camera camera = sceneView.camera;
         if(fov == 0.0f) {
             fov = camera.fieldOfView;
