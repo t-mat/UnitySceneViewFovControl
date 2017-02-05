@@ -19,9 +19,9 @@ Unity Editor ‚ÌƒV[ƒ“ƒrƒ…[ (Scene View) ‚É‘Î‚·‚é•s–‚Ì‚P‚Â‚Æ‚µ‚ÄA FoV (‰æŠp) ‚
 |Ctrl + Alt + ƒzƒC[ƒ‹		|FoV (‰æŠp) ‚Ì•ÏX			|
 |Ctrl + Alt + Shift + ƒzƒC[ƒ‹	|FoV (‰æŠp) ‚Ì•ÏX (‚‘¬)		|
 |Ctrl + Alt + O			|FoV (‰æŠp) ‚Ì‘‰Á (LŠp)		|
-|Ctrl + Alt + P			|FoV (‰æŠp) ‚Ì‘‰Á (‹·Šp / –]‰“)	|
+|Ctrl + Alt + P			|FoV (‰æŠp) ‚ÌŒ¸­ (‹·Šp / –]‰“)	|
 |Ctrl + Alt + Shift + O		|FoV (‰æŠp) ‚Ì‘‰Á (‚‘¬ALŠp)		|
-|Ctrl + Alt + Shift + P		|FoV (‰æŠp) ‚Ì‘‰Á (‚‘¬A‹·Šp / –]‰“)	|
+|Ctrl + Alt + Shift + P		|FoV (‰æŠp) ‚ÌŒ¸­ (‚‘¬A‹·Šp / –]‰“)	|
 
 
 ## ƒ‰ƒCƒZƒ“ƒX
