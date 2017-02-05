@@ -15,6 +15,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 public static class SceneViewFovControl
 {
     static Dictionary<int, Status> statuses = new Dictionary<int, Status>();
+    static public bool EnableFlag = false;
 
     static SceneViewFovControl() {
         Enable(true);
@@ -33,10 +34,13 @@ public static class SceneViewFovControl
 #endif
 
     public static void Enable(bool enable) {
-        if(enable) {
-            SceneViewHiddenApi.AddOnPreSceneGUIDelegate(OnScene);
-        } else {
-            SceneViewHiddenApi.RemoveOnPreSceneGUIDelegate(OnScene);
+        if(enable != EnableFlag) {
+            if(enable) {
+                SceneViewHiddenApi.AddOnPreSceneGUIDelegate(OnScene);
+            } else {
+                SceneViewHiddenApi.RemoveOnPreSceneGUIDelegate(OnScene);
+            }
+            EnableFlag = enable;
         }
         SceneView.RepaintAll();
     }

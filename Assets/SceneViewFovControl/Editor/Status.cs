@@ -25,30 +25,32 @@ class Status {
         }
 
         var ev = Event.current;
+        var settings = Settings.Data;
         float deltaFov = 0.0f;
 
-        if(ev.modifiers == Settings.ModifiersNormal || ev.modifiers == Settings.ModifiersQuick) {
+        if(ev.modifiers == settings.ModifiersNormal || ev.modifiers == settings.ModifiersQuick) {
             if(ev.type == EventType.ScrollWheel) {
                 // todo : Check compatibility of Event.delta.y.
                 //        e.g. Platform, mice, etc.
+                // note : In MacOS, ev.delta becomes zero when "Shift" pressed.  I don't know the reason.
                 deltaFov = ev.delta.y;
                 ev.Use();
-            } else if(ev.type == EventType.KeyDown && ev.keyCode == Settings.KeyCodeIncreaseFov) {
+            } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeIncreaseFov) {
                 deltaFov = +1.0f;
                 ev.Use();
-            } else if(ev.type == EventType.KeyDown && ev.keyCode == Settings.KeyCodeDecreaseFov) {
+            } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeDecreaseFov) {
                 deltaFov = -1.0f;
                 ev.Use();
             }
         }
 
         if(deltaFov != 0.0f) {
-            deltaFov *= Settings.FovSpeed;
-            if(ev.modifiers == Settings.ModifiersQuick) {
-                deltaFov *= Settings.FovQuickMultiplier;
+            deltaFov *= settings.FovSpeed;
+            if(ev.modifiers == settings.ModifiersQuick) {
+                deltaFov *= settings.FovQuickMultiplier;
             }
             fov += deltaFov;
-            fov = Mathf.Clamp(fov, Settings.MinFov, Settings.MaxFov);
+            fov = Mathf.Clamp(fov, settings.MinFov, settings.MaxFov);
         }
 
         camera.fieldOfView = fov;
