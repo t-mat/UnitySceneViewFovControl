@@ -1,8 +1,8 @@
 # Scene View ‚Å‚Ì FoV (‰æŠp) ‚ğ‘€ì‚·‚é Unity Editor Šg’£
 
-|LŠp				|–]‰“ (‹·Šp)			|
-|--------------------		|-------------------------	|
-|![WideFov](images/WideFov)	|![NarrowFov](images/NarrowFov)	|
+|LŠp				|–]‰“ (‹·Šp)				|
+|--------------------		|-------------------------		|
+|![WideFov](images/WideFov.png)	|![NarrowFov](images/NarrowFov.png)	|
 
 
 ## g‚¢•û
