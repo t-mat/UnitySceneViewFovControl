@@ -10,6 +10,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
     static class Settings {
         static SettingsData data = new SettingsData();
 
+        public const string VersionString = "0.13";
         public const string MenuItemName = "Edit/Scene View FoV Settings";
         public const string EditorPrefsKey = "UTJ.UnityEditor.Extension.SceneViewFovControl";
 
@@ -21,6 +22,9 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         public const float MinFovMax = 160.0f;
         public const float MaxFovMin = 1.0f;
         public const float MaxFovMax = 160.0f;
+        public const float ButtonShowingDurationInSeconds = 2.0f;
+
+        public const string WindowTitle = "FoV Control";
 
         public static SettingsData Data {
             get {
@@ -61,6 +65,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
     [Serializable]
     public class SettingsData {
+        public string VersionString;
         public EventModifiers ModifiersNormal;
         public EventModifiers ModifiersQuick;
 
@@ -72,7 +77,10 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         public float MinFov;
         public float MaxFov;
 
+        public float ButtonShowingDurationInSeconds;
+
         public void Reset() {
+            VersionString = Settings.VersionString;
             ModifiersNormal = EventModifiers.Alt | EventModifiers.Control;
             ModifiersQuick  = EventModifiers.Alt | EventModifiers.Control | EventModifiers.Shift;
 
@@ -83,6 +91,8 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
             FovQuickMultiplier = 5.0f;
             MinFov = 2.0f;
             MaxFov = 160.0f;
+
+            ButtonShowingDurationInSeconds = 2.0f;
         }
     }
 
@@ -93,9 +103,8 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         [MenuItem(Settings.MenuItemName)]
         static void Open() {
             if(settingGui == null) {
-                settingGui = CreateInstance<SettingsGui>();
+                settingGui = EditorWindow.GetWindow<SettingsGui>(false, Settings.WindowTitle);
             }
-            settingGui.ShowUtility();
         }
 
         void OnGUI() {
@@ -103,7 +112,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
             GUILayout.Space(4);
 
-            GUILayout.Label("<<< Scene View FoV Control Settings >>>");
+            GUILayout.Label("<<< Scene View FoV Control Settings - version " + Settings.VersionString + ">>>");
 
             GUILayout.Space(8);
 
@@ -155,7 +164,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
                 GUILayout.Space(20);
 
-                if(GUILayout.Button("Default")) {
+                if(GUILayout.Button("Restore default settings")) {
                     d.Reset();
                 }
 

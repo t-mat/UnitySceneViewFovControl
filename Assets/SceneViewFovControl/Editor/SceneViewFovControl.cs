@@ -1,5 +1,3 @@
-//#define SCENE_VIEW_FOV_DEBUG
-
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -21,44 +19,45 @@ public static class SceneViewFovControl
         Enable(true);
     }
 
-#if SCENE_VIEW_FOV_DEBUG
-    [MenuItem("Experimental/Enable SceneView FOV Control")]
-    static void MenuitemEnable() {
-        Enable(true);
-    }
-
-    [MenuItem("Experimental/Disable SceneView FOV Control")]
-    static void MenuitemDisable() {
-        Enable(false);
-    }
-#endif
-
     public static void Enable(bool enable) {
         if(enable != EnableFlag) {
             if(enable) {
                 SceneViewHiddenApi.AddOnPreSceneGUIDelegate(OnScene);
+                SceneView.onSceneGUIDelegate += OnSceneGUI;
             } else {
                 SceneViewHiddenApi.RemoveOnPreSceneGUIDelegate(OnScene);
+                SceneView.onSceneGUIDelegate -= OnSceneGUI;
             }
             EnableFlag = enable;
         }
         SceneView.RepaintAll();
     }
 
-    static void OnScene(SceneView sceneView) {
+    static Status GetOrAddStatus(SceneView sceneView) {
+        Status s = null;
         if(sceneView == null || sceneView.camera == null) {
-            return;
+            return s;
         }
+        int key = sceneView.GetInstanceID();
+        if(! statuses.TryGetValue(key, out s)) {
+            s = new Status();
+            statuses[key] = s;
+        }
+        return s;
+    }
 
-        Status s;
-        {
-            int key = sceneView.GetInstanceID();
-            if(! statuses.TryGetValue(key, out s)) {
-                s = new Status();
-                statuses[key] = s;
-            }
+    static void OnSceneGUI(SceneView sceneView) {
+        Status s = GetOrAddStatus(sceneView);
+        if(s != null) {
+            s.OnSceneGUI(sceneView);
         }
-        s.OnScene(sceneView);
+    }
+
+    static void OnScene(SceneView sceneView) {
+        Status s = GetOrAddStatus(sceneView);
+        if(s != null) {
+            s.OnScene(sceneView);
+        }
     }
 }
 

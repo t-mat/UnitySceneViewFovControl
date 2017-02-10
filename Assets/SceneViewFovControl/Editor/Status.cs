@@ -9,6 +9,8 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
 class Status {
     float fov = 0.0f;
+    bool reset = false;
+    double showResetButtonTime = 0.0;
 
     public void OnScene(SceneView sceneView) {
         if(sceneView == null || sceneView.camera == null) {
@@ -20,8 +22,9 @@ class Status {
         }
 
         Camera camera = sceneView.camera;
-        if(fov == 0.0f) {
+        if(fov == 0.0f || reset) {
             fov = camera.fieldOfView;
+            reset = false;
         }
 
         var ev = Event.current;
@@ -35,8 +38,8 @@ class Status {
                 // note : In MacOS, ev.delta becomes zero when "Shift" pressed.  I don't know the reason.
                 deltaFov = ev.delta.y;
                 ev.Use();
-            } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeIncreaseFov) {
-                deltaFov = +1.0f;
+            } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeDecreaseFov) {
+                deltaFov = -1.0f;
                 ev.Use();
             } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeDecreaseFov) {
                 deltaFov = -1.0f;
@@ -51,9 +54,20 @@ class Status {
             }
             fov += deltaFov;
             fov = Mathf.Clamp(fov, settings.MinFov, settings.MaxFov);
+            showResetButtonTime = EditorApplication.timeSinceStartup + Settings.ButtonShowingDurationInSeconds;
         }
 
         camera.fieldOfView = fov;
+    }
+
+    public void OnSceneGUI(SceneView sceneView) {
+        if(EditorApplication.timeSinceStartup < showResetButtonTime) {
+            Handles.BeginGUI();
+            if (GUI.Button(new Rect(10, 10, 160, 25), "Reset SceneView FoV")) {
+                reset = true;
+            }
+            Handles.EndGUI();
+        }
     }
 }
 
