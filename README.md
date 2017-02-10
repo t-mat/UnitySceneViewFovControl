@@ -27,6 +27,9 @@ This Unity Editor extension is answer for them (at least part of it).
 |Ctrl + Alt + Shift + O		|Increase FoV			|			|
 |Ctrl + Alt + Shift + P		|Decrease FoV (Faster)		|			|
 
+Also when you change FoV of Scene View, you'll see "reset" button at top left corner of Scene View.
+FoV will reset when you push the button.  Also it'll disappear in 2 seconds.
+
 
 ## Change settings and store
 

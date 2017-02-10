@@ -1,4 +1,6 @@
-﻿# Unity Scene FoV Control
+﻿[日本語はこちら / Japanese](README.ja.md)
+
+# Unity Scene FoV Control
 
 Unity Editor Extension which enables controlling Scene View's FoV.
 
@@ -24,6 +26,9 @@ This Unity Editor extension is answer for them (at least part of it).
 |Ctrl + Alt + P			|Decrease FoV			|			|
 |Ctrl + Alt + Shift + O		|Increase FoV			|			|
 |Ctrl + Alt + Shift + P		|Decrease FoV (Faster)		|			|
+
+Also when you change FoV of Scene View, you'll see "reset" button at top left corner of Scene View.
+FoV will reset when you push the button.  Also it'll disappear in 2 seconds.
 
 
 ## Change settings and store
