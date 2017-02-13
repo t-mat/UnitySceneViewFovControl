@@ -54,16 +54,17 @@ class Status {
             }
             fov += deltaFov;
             fov = Mathf.Clamp(fov, settings.MinFov, settings.MaxFov);
-            showResetButtonTime = EditorApplication.timeSinceStartup + Settings.ButtonShowingDurationInSeconds;
+            showResetButtonTime = EditorApplication.timeSinceStartup + settings.ButtonShowingDurationInSeconds;
         }
 
         camera.fieldOfView = fov;
     }
 
     public void OnSceneGUI(SceneView sceneView) {
-        if(EditorApplication.timeSinceStartup < showResetButtonTime) {
+        var settings = Settings.Data;
+        if(EditorApplication.timeSinceStartup < showResetButtonTime || settings.AlwaysShowResetButton) {
             Handles.BeginGUI();
-            if (GUI.Button(new Rect(10, 10, 160, 25), "Reset SceneView FoV")) {
+            if (GUI.Button(new Rect(10, 10, 160, 32), "Reset SceneView FoV\n" + fov)) {
                 reset = true;
             }
             Handles.EndGUI();
