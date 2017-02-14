@@ -14,7 +14,7 @@ This Unity Editor extension is answer for them (at least part of it).
 
 ## How to use
 
-- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.3/SceneViewFovControl.unitypackage) to your Unity project.
+- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.4/SceneViewFovControl.unitypackage) to your Unity project.
     - Use "Assets > Import Package > Custom Package..." when you want to import it from file.
 - After importing, you'll use the folloing control in the Scene View.
 
