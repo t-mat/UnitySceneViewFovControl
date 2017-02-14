@@ -1,4 +1,6 @@
-﻿# Scene View での FoV (画角) を操作する Unity Editor 拡張
+﻿[English](README.en.md)
+
+# Scene View での FoV (画角) を操作する Unity Editor 拡張
 
 |広角				|望遠 (狭角)				|
 |--------------------		|-------------------------		|
@@ -38,9 +40,14 @@ Unity Editor のメニュー "Edit > Scene View FoV Settings" を選択すると
 |Min FoV			|FoV 最小値 (角度単位)			|
 |Max FoV			|FoV 最大値 (角度単位)			|
 |				|					|
+|<Reset Scene FoV>		|					|
+|Button Showing Duration	|シーンビューへの「リセット」ボタンの表示時間。最小値で非表示、最大値で常時表示	|
+|				|					|
 |Disable			|FoV 変更の動作を停止する		|
+|				|					|
 |Save				|設定値の保存				|
-|Default			|デフォルトの設定値読み込み		|
+|Restore Default Settings	|デフォルトの設定値読み込み		|
+|Restore Saved Settings		|保存済みの設定値の読み直し		|
 |Close				|ウィンドウを閉じる			|
 
 

@@ -42,9 +42,14 @@ You can show settings window via "Edit > Scene View FoV Settings"
 |Min FoV			|Minimum FoV value			|
 |Max FoV			|Maximum FoV value			|
 |				|					|
+|<Reset Scene FoV>		|					|
+|Button Showing Duration	|Duration of showing "Reset" button in the SceneView. Minimum value means "Don't show."  Maximum value means "Always show."	|
+|				|					|
 |Disable			|Disable this editor extension		|
+|				|					|
 |Save				|Save settings				|
-|Default			|Restore default settings		|
+|Restore Default Settings	|Restore default settings		|
+|Restore Saved Settings		|Restore last saved settings		|
 |Close				|Close settings window			|
 
 
