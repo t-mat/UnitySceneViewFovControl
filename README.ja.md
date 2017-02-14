@@ -25,8 +25,7 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 |Ctrl + Alt + Shift + O		|FoV (画角) の増加 (高速、広角)		|			|
 |Ctrl + Alt + Shift + P		|FoV (画角) の減少 (高速、狭角 / 望遠)	|			|
 
-FoV を変更すると、シーンビューの左上に「リセット」ボタンが表示されます。
-このボタンを押すと、シーンビューの FoV がリセットされます。また、このボタンは２秒間 FoV 操作を行わないと自動的に消えます。
+FoV を変更すると、シーンビューの左上に「リセット」ボタンが表示されます。このボタンを押すと、シーンビューの FoV がリセットされます。
 
 
 ## 設定の変更と保存
@@ -36,11 +35,11 @@ Unity Editor のメニュー "Edit > Scene View FoV Settings" を選択すると
 |項目				|意味					|
 |--------------------		|-------------------------		|
 |FoV Speed			|FoV 変更速度				|
-|FoV <Shift> Modifier Multiplier|Shift 押下時の変更速度倍率		|
+|FoV Shift Modifier Multiplier	|Shift 押下時の変更速度倍率		|
 |Min FoV			|FoV 最小値 (角度単位)			|
 |Max FoV			|FoV 最大値 (角度単位)			|
 |				|					|
-|<Reset Scene FoV>		|					|
+|Reset Scene FoV		|					|
 |Button Showing Duration	|シーンビューへの「リセット」ボタンの表示時間。最小値で非表示、最大値で常時表示	|
 |				|					|
 |Disable			|FoV 変更の動作を停止する		|
