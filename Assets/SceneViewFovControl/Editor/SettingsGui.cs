@@ -56,34 +56,13 @@ class SettingsGui : EditorWindow {
 
         GUILayout.Space(8);
 
-        if(d.AlwaysShowResetButton) {
-            GUILayout.Label("<Reset Scene FoV> Button Showing Duration (sec): Infinite");
-        } else if(d.NeverShowResetButton) {
-            GUILayout.Label("<Reset Scene FoV> Button Showing Duration (sec): Never");
-        } else {
-            GUILayout.Label("<Reset Scene FoV> Button Showing Duration (sec):" + d.ButtonShowingDurationInSeconds);
-        }
-        d.ButtonShowingDurationInSeconds = GUILayout.HorizontalSlider(d.ButtonShowingDurationInSeconds, Settings.MinButtonShowingDurationInSeconds, Settings.MaxButtonShowingDurationInSeconds);
-
         if(d.MaxFov < d.MinFov) {
             d.MinFov = d.MaxFov;
         }
 
         GUILayout.Space(20);
 
-        if(SceneViewFovControl.EnableFlag) {
-            if(GUILayout.Button("Disable")) {
-                SceneViewFovControl.Enable(false);
-            }
-        } else {
-            if(GUILayout.Button("Enable")) {
-                SceneViewFovControl.Enable(true);
-            }
-        }
-
-        GUILayout.Space(20);
-
-        EditorGUILayout.BeginHorizontal();
+        global::UnityEditor.EditorGUILayout.BeginHorizontal();
         {
             if(GUILayout.Button("Save")) {
                 Settings.Save();
@@ -108,7 +87,7 @@ class SettingsGui : EditorWindow {
                 this.Close();
             }
         }
-        EditorGUILayout.EndHorizontal();
+        global::UnityEditor.EditorGUILayout.EndHorizontal();
     }
 }
 

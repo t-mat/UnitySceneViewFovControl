@@ -11,7 +11,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         static SettingsData data = new SettingsData();
         static SettingsData loadedData = new SettingsData();
 
-        public const string VersionString = "0.1.4";
+        public const string VersionString = "0.1.5";
         public const string MenuItemName = "Edit/Scene View FoV Settings";
         public const string EditorPrefsKey = "UTJ.UnityEditor.Extension.SceneViewFovControl";
 
@@ -23,9 +23,6 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         public const float MinFovMax = 160.0f;
         public const float MaxFovMin = 1.0f;
         public const float MaxFovMax = 160.0f;
-        public const float ButtonShowingDurationInSeconds = 2.0f;
-        public const float MinButtonShowingDurationInSeconds = 0.0f;
-        public const float MaxButtonShowingDurationInSeconds = 5.0f;
 
         public const string WindowTitle = "FoV Control";
 
@@ -92,8 +89,6 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         public float MinFov;
         public float MaxFov;
 
-        public float ButtonShowingDurationInSeconds;
-
         public SettingsData Clone() {
             return (SettingsData) this.MemberwiseClone();
         }
@@ -110,24 +105,6 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
             FovQuickMultiplier = 5.0f;
             MinFov = 2.0f;
             MaxFov = 160.0f;
-
-            ButtonShowingDurationInSeconds = Settings.ButtonShowingDurationInSeconds;
-        }
-
-        public bool AlwaysShowResetButton {
-            get {
-                return ButtonShowingDurationInSeconds == Settings.MaxButtonShowingDurationInSeconds;
-            }
-        }
-
-        public bool NeverShowResetButton {
-            get {
-                return ButtonShowingDurationInSeconds == Settings.MinButtonShowingDurationInSeconds;
-            }
-        }
-
-        public bool Dirty {
-            get; set;
         }
     }
 }

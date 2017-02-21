@@ -13,7 +13,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 public static class SceneViewFovControl
 {
     static Dictionary<int, Status> statuses = new Dictionary<int, Status>();
-    static public bool EnableFlag = false;
+    static bool EnableFlag = false;
 
     static SceneViewFovControl() {
         Enable(true);

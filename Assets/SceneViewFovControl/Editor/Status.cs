@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 #if !UNITY_EDITOR
@@ -10,14 +10,21 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 class Status {
     float fov = 0.0f;
     bool reset = false;
-    double showResetButtonTime = 0.0;
+    bool autoFov = true;
+    float lastOnSceneGuiFov = 0.0f;
+
+    const string ButtonStringFovAuto = "FoV:Auto";
+    const string ButtonStringFovUser = "FoV:{0:0.00}";
+
+    static readonly GUIContent ButtonContentFovAuto = new GUIContent(ButtonStringFovAuto);
+    GUIContent ButtonContentFovUser = new GUIContent(ButtonStringFovUser);
 
     public void OnScene(SceneView sceneView) {
         if(sceneView == null || sceneView.camera == null) {
             return;
         }
 
-        if(sceneView.in2DMode) {
+        if(sceneView.in2DMode || autoFov) {
             return;
         }
 
@@ -54,21 +61,33 @@ class Status {
             }
             fov += deltaFov;
             fov = Mathf.Clamp(fov, settings.MinFov, settings.MaxFov);
-            showResetButtonTime = EditorApplication.timeSinceStartup + settings.ButtonShowingDurationInSeconds;
         }
 
         camera.fieldOfView = fov;
     }
 
     public void OnSceneGUI(SceneView sceneView) {
-        var settings = Settings.Data;
-        if(EditorApplication.timeSinceStartup < showResetButtonTime || settings.AlwaysShowResetButton) {
-            Handles.BeginGUI();
-            if (GUI.Button(new Rect(10, 10, 160, 32), "Reset SceneView FoV\n" + fov)) {
-                reset = true;
+        var content = ButtonContentFovUser;
+        if(autoFov) {
+            content = ButtonContentFovAuto;
+        } else {
+            if(lastOnSceneGuiFov != fov) {
+                lastOnSceneGuiFov = fov;
+                ButtonContentFovUser = new GUIContent(string.Format(ButtonStringFovUser, fov));
             }
-            Handles.EndGUI();
+            content = ButtonContentFovUser;
         }
+
+        GUIStyle style = EditorStyles.toolbarButton;
+        sceneView.DoToolbarRightSideGUI(content, style, (rect) => {
+            if (GUI.Button(rect, content, style)) {
+                autoFov = !autoFov;
+                if(!autoFov) {
+                    reset = true;
+                }
+            }
+        });
+
     }
 }
 
