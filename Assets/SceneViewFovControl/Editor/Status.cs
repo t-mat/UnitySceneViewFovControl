@@ -45,8 +45,8 @@ class Status {
                 // note : In MacOS, ev.delta becomes zero when "Shift" pressed.  I don't know the reason.
                 deltaFov = ev.delta.y;
                 ev.Use();
-            } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeDecreaseFov) {
-                deltaFov = -1.0f;
+            } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeIncreaseFov) {
+                deltaFov = +1.0f;
                 ev.Use();
             } else if(ev.type == EventType.KeyDown && ev.keyCode == settings.KeyCodeDecreaseFov) {
                 deltaFov = -1.0f;

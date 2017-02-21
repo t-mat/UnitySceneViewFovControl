@@ -11,7 +11,7 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
         static SettingsData data = new SettingsData();
         static SettingsData loadedData = new SettingsData();
 
-        public const string VersionString = "0.1.5";
+        public const string VersionString = "0.1.6";
         public const string MenuItemName = "Edit/Scene View FoV Settings";
         public const string EditorPrefsKey = "UTJ.UnityEditor.Extension.SceneViewFovControl";
 
