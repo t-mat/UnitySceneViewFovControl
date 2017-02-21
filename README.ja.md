@@ -2,6 +2,10 @@
 
 # Scene View での FoV (画角) を操作する Unity Editor 拡張
 
+|操作例				|
+|--------------------		|
+|![demo](images/demo.gif)	|
+
 |広角				|望遠 (狭角)				|
 |--------------------		|-------------------------		|
 |![WideFov](images/WideFov.png)	|![NarrowFov](images/NarrowFov.png)	|

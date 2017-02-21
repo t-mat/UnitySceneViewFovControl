@@ -4,6 +4,10 @@
 
 Unity Editor Extension which enables controlling Scene View's FoV.
 
+|Demo				|
+|--------------------		|
+|![demo](images/demo.gif)	|
+
 |Wide angle			|Telescopic (narrow angle)		|
 |--------------------		|-------------------------		|
 |![WideFov](images/WideFov.png)	|![NarrowFov](images/NarrowFov.png)	|
