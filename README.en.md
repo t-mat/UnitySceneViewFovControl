@@ -14,18 +14,19 @@ With this extension, you will now be able to do this using the Unity Editor's pr
 
 ## How to use
 
-- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.4/SceneViewFovControl.unitypackage) to your Unity project.
+- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.5/SceneViewFovControl.unitypackage) to your Unity project.
     - Import from the file by selecting "Assets > Import Package > Custom Package."
 - You will be able to do the following in Scene View after importing.
 
-|Keyboard/Mouse			|Effect							|Note			|
-|--------------------		|-------------------------				|----			|
-|Ctrl + Alt + Wheel		|Changes FoV						|			|
-|Ctrl + Alt + Shift + Wheel	|Changes FoV (high speed)				|Unavailable on Mac	|
-|Ctrl + Alt + O			|Increases FoV (wide angle)				|			|
-|Ctrl + Alt + P			|Reduces FoV (narrow angle/telescopic)			|			|
-|Ctrl + Alt + Shift + O		|Increases FoV (high speed, wide angle)			|			|
-|Ctrl + Alt + Shift + P		|Reduces FoV (high speed, narrow angle/telescopic)	|			|
+|Keyboard/Mouse					|Effect							|Note			|
+|--------------------				|-------------------------				|----			|
+|`FoV` button in the toolbar of Scene View	|Toggle FoV mode (auto / manual)			|			|
+|Ctrl + Alt + Wheel				|Changes FoV						|			|
+|Ctrl + Alt + Shift + Wheel			|Changes FoV (high speed)				|Unavailable on Mac	|
+|Ctrl + Alt + O					|Increases FoV (wide angle)				|			|
+|Ctrl + Alt + P					|Reduces FoV (narrow angle/telescopic)			|			|
+|Ctrl + Alt + Shift + O				|Increases FoV (high speed, wide angle)			|			|
+|Ctrl + Alt + Shift + P				|Reduces FoV (high speed, narrow angle/telescopic)	|			|
 
 A reset button will appear in the top left of the Scene View if you change the FoV.  Clicking this button will return the Scene View's FoV back to its default.
 
@@ -40,11 +41,6 @@ Select "Edit" > "Scene View FoV Settings" in the Unity Editor menu to open the s
 |FoV Shift Modifier Multiplier	|Multiplies the modifier speed when pressing Shift	|
 |Min FoV			|Minimizes FoV (angular unit)				|
 |Max FoV			|Maximizes FoV (angular unit)				|
-|				|							|
-|Reset Scene FoV		|							|
-|Button Showing Duration	|Determines how long the reset button will be shown in Scene View. Button is not displayed at the lowest value, and is always displayed at the highest	|
-|				|							|
-|Disable			|Disables function for changing FoV			|
 |				|							|
 |Save				|Saves the settings					|
 |Restore Default Settings	|Restores the default settings				|

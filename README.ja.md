@@ -12,18 +12,19 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 
 ## 使い方
 
-- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.4/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
+- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.5/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
     - ファイルからのインポートは "Assets > Import Package > Custom Package..." から行います
 - インポート後、 シーンビュー (Scene View) 内で以下の操作が可能になります
 
-|キー/マウス操作		|効果					|備考			|
-|--------------------		|-------------------------		|----			|
-|Ctrl + Alt + ホイール		|FoV (画角) の変更			|			|
-|Ctrl + Alt + Shift + ホイール	|FoV (画角) の変更 (高速)		|Mac では使用不可	|
-|Ctrl + Alt + O			|FoV (画角) の増加 (広角)		|			|
-|Ctrl + Alt + P			|FoV (画角) の減少 (狭角 / 望遠)	|			|
-|Ctrl + Alt + Shift + O		|FoV (画角) の増加 (高速、広角)		|			|
-|Ctrl + Alt + Shift + P		|FoV (画角) の減少 (高速、狭角 / 望遠)	|			|
+|キー/マウス操作				|効果					|備考			|
+|--------------------				|-------------------------		|----			|
+|シーンビューツールバー右側の `FoV` ボタン	|FoV 変更モードの切り替え (自動 / 手動)	|			|
+|Ctrl + Alt + ホイール				|FoV (画角) の変更			|			|
+|Ctrl + Alt + Shift + ホイール			|FoV (画角) の変更 (高速)		|Mac では使用不可	|
+|Ctrl + Alt + O					|FoV (画角) の増加 (広角)		|			|
+|Ctrl + Alt + P					|FoV (画角) の減少 (狭角 / 望遠)	|			|
+|Ctrl + Alt + Shift + O				|FoV (画角) の増加 (高速、広角)		|			|
+|Ctrl + Alt + Shift + P				|FoV (画角) の減少 (高速、狭角 / 望遠)	|			|
 
 FoV を変更すると、シーンビューの左上に「リセット」ボタンが表示されます。このボタンを押すと、シーンビューの FoV がリセットされます。
 
@@ -38,11 +39,6 @@ Unity Editor のメニュー "Edit > Scene View FoV Settings" を選択すると
 |FoV Shift Modifier Multiplier	|Shift 押下時の変更速度倍率		|
 |Min FoV			|FoV 最小値 (角度単位)			|
 |Max FoV			|FoV 最大値 (角度単位)			|
-|				|					|
-|Reset Scene FoV		|					|
-|Button Showing Duration	|シーンビューへの「リセット」ボタンの表示時間。最小値で非表示、最大値で常時表示	|
-|				|					|
-|Disable			|FoV 変更の動作を停止する		|
 |				|					|
 |Save				|設定値の保存				|
 |Restore Default Settings	|デフォルトの設定値読み込み		|
