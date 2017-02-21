@@ -1,56 +1,55 @@
 ﻿[日本語はこちら / Japanese](README.ja.md)
 
-# Unity Scene FoV Control
+# Unity Editor Extension Controls Field of View (FoV) in Scene View
 
 Unity Editor Extension which enables controlling Scene View's FoV.
 
-|Wide FoV			|Narrow FoV				|
+|Wide angle			|Telescopic (narrow angle)		|
 |--------------------		|-------------------------		|
 |![WideFov](images/WideFov.png)	|![NarrowFov](images/NarrowFov.png)	|
 
-Sometimes, [people](https://feedback.unity3d.com/suggestions/editor-camera-fov-adjustable) [complains](https://feedback.unity3d.com/suggestions/scene-view-camera-field-of-view-adjustment) for lack of Unity Editor's FoV control.
-This Unity Editor extension is answer for them (at least part of it).
+One thing [people](https://feedback.unity3d.com/suggestions/editor-camera-fov-adjustable) [repeatedly say](https://feedback.unity3d.com/suggestions/scene-view-camera-field-of-view-adjustment) is missing in Unity Editor's Scene View is that there is no way to control the Field of View (FoV).
+With this extension, you will now be able to do this using the Unity Editor's private API.
 
 
 ## How to use
 
 - Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.4/SceneViewFovControl.unitypackage) to your Unity project.
-    - Use "Assets > Import Package > Custom Package..." when you want to import it from file.
-- After importing, you'll use the folloing control in the Scene View.
+    - Import from the file by selecting "Assets > Import Package > Custom Package."
+- You will be able to do the following in Scene View after importing.
 
-|Keyboard/Mouse			|Effect				|Note			|
-|--------------------		|-------------------------	|----			|
-|Ctrl + Alt + Wheel		|Change FoV			|			|
-|Ctrl + Alt + Shift + Wheel	|Change FoV (Faster)		|Doesn't work with MacOS|
-|Ctrl + Alt + O			|Increase FoV			|			|
-|Ctrl + Alt + P			|Decrease FoV			|			|
-|Ctrl + Alt + Shift + O		|Increase FoV			|			|
-|Ctrl + Alt + Shift + P		|Decrease FoV (Faster)		|			|
+|Keyboard/Mouse			|Effect							|Note			|
+|--------------------		|-------------------------				|----			|
+|Ctrl + Alt + Wheel		|Changes FoV						|			|
+|Ctrl + Alt + Shift + Wheel	|Changes FoV (high speed)				|Unavailable on Mac	|
+|Ctrl + Alt + O			|Increases FoV (wide angle)				|			|
+|Ctrl + Alt + P			|Reduces FoV (narrow angle/telescopic)			|			|
+|Ctrl + Alt + Shift + O		|Increases FoV (high speed, wide angle)			|			|
+|Ctrl + Alt + Shift + P		|Reduces FoV (high speed, narrow angle/telescopic)	|			|
 
-Also when you change FoV of Scene View, you'll see "reset" button at top left corner of Scene View.
-FoV will reset when you push the button.
+A reset button will appear in the top left of the Scene View if you change the FoV.  Clicking this button will return the Scene View's FoV back to its default.
 
 
-## Change settings and store
+## Changing and Saving Settings
 
-You can show settings window via "Edit > Scene View FoV Settings"
+Select "Edit" > "Scene View FoV Settings" in the Unity Editor menu to open the settings window.
 
-|Item				|Meaning				|
-|--------------------		|-------------------------		|
-|FoV Speed			|FoV changing speed			|
-|FoV Shift Modifier Multiplier	|Multiplier when you pressing Shift	|
-|Min FoV			|Minimum FoV value			|
-|Max FoV			|Maximum FoV value			|
-|				|					|
-|Reset Scene FoV		|					|
-|Button Showing Duration	|Duration of showing "Reset" button in the SceneView. Minimum value means "Don't show."  Maximum value means "Always show."	|
-|				|					|
-|Disable			|Disable this editor extension		|
-|				|					|
-|Save				|Save settings				|
-|Restore Default Settings	|Restore default settings		|
-|Restore Saved Settings		|Restore last saved settings		|
-|Close				|Close settings window			|
+|Item				|Meaning						|
+|--------------------		|-------------------------				|
+|FoV Speed			|Changes FoV speed					|
+|FoV Shift Modifier Multiplier	|Multiplies the modifier speed when pressing Shift	|
+|Min FoV			|Minimizes FoV (angular unit)				|
+|Max FoV			|Maximizes FoV (angular unit)				|
+|				|							|
+|Reset Scene FoV		|							|
+|Button Showing Duration	|Determines how long the reset button will be shown in Scene View. Button is not displayed at the lowest value, and is always displayed at the highest	|
+|				|							|
+|Disable			|Disables function for changing FoV			|
+|				|							|
+|Save				|Saves the settings					|
+|Restore Default Settings	|Restores the default settings				|
+|Restore Saved Settings		|Restores the saved settings				|
+|Close				|Closes the window					|
 
 
 ## License
