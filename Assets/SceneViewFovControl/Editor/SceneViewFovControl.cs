@@ -49,7 +49,9 @@ public static class SceneViewFovControl
     static void OnSceneGUI(SceneView sceneView) {
         Status s = GetOrAddStatus(sceneView);
         if(s != null) {
+            Handles.BeginGUI();
             s.OnSceneGUI(sceneView);
+            Handles.EndGUI();
         }
     }
 
