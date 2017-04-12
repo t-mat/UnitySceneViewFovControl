@@ -10,6 +10,8 @@
                 ...
 ```
 
+- Add tag
+
 - Push changes to the repository at github.
 
 - Create a `.unitypackage`
