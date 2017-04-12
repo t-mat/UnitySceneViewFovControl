@@ -10,8 +10,6 @@
                 ...
 ```
 
-- Add tag
-
 - Push changes to the repository at github.
 
 - Create a `.unitypackage`
@@ -19,7 +17,8 @@
   - Select "Assets > Make SceneViewFovControl.unitypackage"
   - `SceneViewFovControl.unitypackage` will be put in root directory of the Unity Project.
 
-- Upload it via "Draft Release" page at github.
+- Upload `.unitypackage` via "Draft Release" page at github.
+  - Also add tag in the "Draft Release" page
 
 - Change release URL in README.md, README.en.md and README.ja.md
 
