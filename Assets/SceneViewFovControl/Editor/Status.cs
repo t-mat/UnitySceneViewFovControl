@@ -1,4 +1,5 @@
 ﻿// https://github.com/anchan828/unitejapan2014/tree/master/SyncCamera/Assets
+// todo: near/far clip control
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -8,26 +9,25 @@ using System.Collections.Generic;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 class Status {
-    static WeakReference masterSceneView = new WeakReference(null);
     float fov = 0.0f;
     bool reset = false;
     bool autoFov = true;
     float lastOnSceneGuiFov = 0.0f;
+    WeakReference slaveCamera = new WeakReference(null);
 
-    static Camera[] activeCameras = new Camera[0];
+    bool previousAutoFov = false;
+    System.Object previousSlaveCamera = null;
 
     const string ButtonStringFovAuto = "FoV:Auto";
     const string ButtonStringFovUser = "FoV:{0:0.00}";
+    const string ButtonStringFovAutoWithSlave = "FoV:Auto>{0}";
+    const string ButtonStringFovUserWithSlave = "FoV:{0:0.00}>{1}";
+    const string SlaveCameraSubMenu = "Slave Camera/{0}";
 
-    static readonly GUIContent ButtonContentFovAuto = new GUIContent(ButtonStringFovAuto);
-    GUIContent ButtonContentFovUser = new GUIContent(ButtonStringFovUser);
-
-    enum MenuId {
-        ToggleMainCameraFollowsSceneView
-    }
+    GUIContent ButtonContent = null;
 
     public void OnScene(SceneView sceneView) {
         if(sceneView == null
@@ -51,8 +51,6 @@ class Status {
 
             if(ev.modifiers == settings.ModifiersNormal || ev.modifiers == settings.ModifiersQuick) {
                 if(ev.type == EventType.ScrollWheel) {
-                    // todo : Check compatibility of Event.delta.y.
-                    //        e.g. Platform, mice, etc.
                     // note : In MacOS, ev.delta becomes zero when "Shift" pressed.  I don't know the reason.
                     deltaFov = ev.delta.y;
                     ev.Use();
@@ -77,25 +75,9 @@ class Status {
             camera.fieldOfView = fov;
         }
 
-        if(IsMasterSceneView(sceneView)) {
-            // todo : It should choose a camera which is shown in the "Camera Preview" window in the Scene View.
-            if(activeCameras.Length == 0) {
-                var mainCamera = Camera.main;
-                CopyCameraInfo(from: camera, to: mainCamera);
-            } else {
-                foreach(var toCamera in activeCameras) {
-                    CopyCameraInfo(from: camera, to: toCamera);
-                }
-            }
+        if(HasSlaveCamera()) {
+            CopyCameraInfo(from: camera, to: GetSlaveCamera());
         }
-    }
-
-    static void SetMasterSceneView(SceneView sceneView) {
-        masterSceneView = new WeakReference(sceneView);
-    }
-
-    static bool IsMasterSceneView(SceneView sceneView) {
-        return sceneView != null && masterSceneView.Target as SceneView == sceneView;
     }
 
     public static void CopyCameraInfo(Camera from, Camera to) {
@@ -108,7 +90,42 @@ class Status {
     }
 
     public void OnSceneGUI(SceneView sceneView) {
-        var content = ButtonContentFovUser;
+        {
+            bool f = false;
+            if(!autoFov && lastOnSceneGuiFov != fov) {
+                lastOnSceneGuiFov = fov;
+                f = true;
+            }
+            if(previousAutoFov != autoFov) {
+                previousAutoFov = autoFov;
+                f = true;
+            }
+            if(GetSlaveCamera() as System.Object != previousSlaveCamera) {
+                previousSlaveCamera = GetSlaveCamera() as System.Object;
+                f = true;
+            }
+
+            if(f || ButtonContent == null) {
+                string s;
+                if(autoFov) {
+                    if(HasSlaveCamera()) {
+                        s = string.Format(ButtonStringFovAutoWithSlave, GetSlaveCameraName());
+                    } else {
+                        s = ButtonStringFovAuto;
+                    }
+                } else {
+                    if(HasSlaveCamera()) {
+                        s = string.Format(ButtonStringFovUserWithSlave, fov, GetSlaveCameraName());
+                    } else {
+                        s = string.Format(ButtonStringFovUser, fov);
+                    }
+                }
+                ButtonContent = new GUIContent(s);
+            }
+        }
+
+/*
+        var content = ButtonContent;
         if(autoFov) {
             content = ButtonContentFovAuto;
         } else {
@@ -118,14 +135,14 @@ class Status {
             }
             content = ButtonContentFovUser;
         }
-
-        GUIStyle style = EditorStyles.toolbarButton;
-        sceneView.DoToolbarRightSideGUI(content, style, (rect) => {
+*/
+        GUIStyle style = EditorStyles.toolbarDropDown;
+        sceneView.DoToolbarRightSideGUI(ButtonContent, style, (rect) => {
             int btn = -1;
             if(Event.current.type == EventType.MouseUp) {
                 btn = Event.current.button;
             }
-            if (GUI.Button(rect, content, style)) {
+            if (GUI.Button(rect, ButtonContent, style)) {
                 if(btn == 1) {
                     OnFovButtonRightClicked(sceneView);
                 } else {
@@ -135,86 +152,95 @@ class Status {
         });
     }
 
-    public void ToggleAutoFov() {
-        autoFov = !autoFov;
-        if(!autoFov) {
-            reset = true;
-        }
-    }
-
-    public static void ToggleMainCameraFollowsSceneView(SceneView sceneView) {
-        if(IsMasterSceneView(sceneView)) {
-            SetMasterSceneView(null);
-        } else {
-            SetMasterSceneView(sceneView);
+    void SetAutoFov(bool auto) {
+        if(autoFov != auto) {
+            autoFov = auto;
+            if(!autoFov) {
+                reset = true;
+            }
         }
     }
 
     // This procedure will be called when "FoV" button is left-clcked.
     void OnFovButtonLeftClicked(SceneView sceneView) {
-        ToggleAutoFov();
+        SetAutoFov(!autoFov);
     }
 
     // This procedure will be called when "FoV" button is right-clcked.
     void OnFovButtonRightClicked(SceneView sceneView) {
         var menu = new GenericMenu();
-        //  todo: near/far clip control
-        // todo: main (active) camera stick with scene view (toast, toggle)
+
         menu.AddItem(
-            new GUIContent("Main Camera follows this Scene View")
+            new GUIContent("FoV : Auto (Default behaviour)")
+            , autoFov
+            , (obj) => {
+                SetAutoFov(true);
+            }
+            , 0
+        );
+
+        menu.AddItem(
+            new GUIContent("FoV : Manual")
+            , !autoFov
+            , (obj) => {
+                SetAutoFov(false);
+            }
+            , 0
+        );
+
+        menu.AddSeparator(string.Empty);
+
+        menu.AddItem(
+            new GUIContent("Reset Slave Camera")
             , false
             , (obj) => {
-                ToggleMainCameraFollowsSceneView(sceneView);
+                SetSlaveCamera(null);
             }
-            , MenuId.ToggleMainCameraFollowsSceneView
+            , 0
         );
-        //menu.AddItem(new GUIContent("Item"), false, Callback, 2);
+
+        {
+            menu.AddSeparator(string.Format(SlaveCameraSubMenu, string.Empty));
+            foreach(var camera in Camera.allCameras) {
+                menu.AddItem(
+                    new GUIContent(string.Format(SlaveCameraSubMenu, camera.name))
+                    , IsSlaveCamera(camera)
+                    , (obj) => {
+                        SetSlaveCamera(obj as Camera);
+                    }
+                    , camera
+                );
+            }
+        }
+
         menu.ShowAsContext();
     }
 
-    [InitializeOnLoadMethod]
-    static void ActiveCameraCorrector() {
-        Selection.selectionChanged += () => {
-            Camera[] newActiveCameras = null;
-            {
-                var activeCameraList = new List<Camera>();
-                var goes = Selection.gameObjects;
-                if(goes != null) {
-                    foreach(var go in goes) {
-                        var camera = go.GetComponent<Camera>();
-                        if(camera != null) {
-                            activeCameraList.Add(camera);
-                        }
-                    }
-                }
-                if(activeCameraList.Count == 0) {
-                    newActiveCameras = new Camera[1] { Camera.main };
-                } else {
-                    activeCameraList.Sort(delegate(Camera lhs, Camera rhs) {
-                        return lhs.GetInstanceID() - rhs.GetInstanceID();
-                    });
-                    newActiveCameras = activeCameraList.ToArray();
-                }
-            }
+    bool HasSlaveCamera() {
+        return GetSlaveCamera() != null;
+    }
 
-            bool activeCamerasAreChanged = false;
-            if(activeCameras.Length != newActiveCameras.Length) {
-                activeCamerasAreChanged = true;
-            } else {
-                for(int i = 0; i < newActiveCameras.Length; ++i) {
-                    if(!object.Equals(newActiveCameras[i], activeCameras[i])) {
-                        activeCamerasAreChanged = true;
-                        break;
-                    }
-                }
-            }
+    bool IsSlaveCamera(Camera camera) {
+        return camera == GetSlaveCamera();
+    }
 
-            if(activeCamerasAreChanged) {
-                // When active camera is changed, disable copying scene view transform to game view.
-                SetMasterSceneView(null);
-                activeCameras = newActiveCameras;
-            }
-        };
+    Camera GetSlaveCamera() {
+        if(! slaveCamera.IsAlive) {
+            return null;
+        }
+        return slaveCamera.Target as Camera;
+    }
+
+    string GetSlaveCameraName() {
+        var camera = GetSlaveCamera();
+        if(camera != null) {
+            return camera.name;
+        }
+        return "Camera(null)";
+    }
+
+    void SetSlaveCamera(Camera camera) {
+        slaveCamera = new WeakReference(camera);
     }
 }
 

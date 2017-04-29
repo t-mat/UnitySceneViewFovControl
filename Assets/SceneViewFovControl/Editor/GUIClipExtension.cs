@@ -7,7 +7,7 @@ using System.Reflection;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 // https://github.com/MattRix/UnityDecompiled/blob/753fde37d331b2100f93cc5f9eb343f1dcff5eee/UnityEngine/UnityEngine/GUIClip.cs
 static class GUIClip {

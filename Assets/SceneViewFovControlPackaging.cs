@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 public static class Packaging {
 	const string PackageName = "SceneViewFovControl.unitypackage";

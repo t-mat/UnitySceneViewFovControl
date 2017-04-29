@@ -6,7 +6,7 @@ using System;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
     static class Settings {
         public const string VersionString = "0.1.8";
         public const string MenuItemName = "Edit/Scene View FoV Settings";

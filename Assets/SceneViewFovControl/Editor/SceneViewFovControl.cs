@@ -7,7 +7,7 @@ using System.Collections.Generic;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 [InitializeOnLoad]
 public static class SceneViewFovControl

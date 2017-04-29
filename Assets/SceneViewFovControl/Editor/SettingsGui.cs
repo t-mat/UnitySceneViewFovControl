@@ -6,7 +6,7 @@ using System;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 [InitializeOnLoad]
 class SettingsGui : EditorWindow {
@@ -62,7 +62,7 @@ class SettingsGui : EditorWindow {
 
         GUILayout.Space(20);
 
-        global::UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.BeginHorizontal();
         {
             if(GUILayout.Button("Save")) {
                 Settings.Save();
@@ -87,7 +87,7 @@ class SettingsGui : EditorWindow {
                 this.Close();
             }
         }
-        global::UnityEditor.EditorGUILayout.EndHorizontal();
+        UnityEditor.EditorGUILayout.EndHorizontal();
     }
 }
 

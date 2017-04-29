@@ -7,13 +7,13 @@ using System.Reflection;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 // https://github.com/MattRix/UnityDecompiled/blob/753fde37d331b2100f93cc5f9eb343f1dcff5eee/UnityEditor/UnityEditor/SceneView.cs
 static class SceneViewHiddenApiExtension {
     const BindingFlags nonPublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
-    static readonly Type typeSceneView = typeof(global::UnityEditor.SceneView);
+    static readonly Type typeSceneView = typeof(UnityEditor.SceneView);
     static readonly MethodInfo mi_UseSceneFiltering = typeSceneView.GetMethod("UseSceneFiltering", nonPublicInstance);
     static readonly MethodInfo mi_SceneCameraRendersIntoRT = typeSceneView.GetMethod("SceneCameraRendersIntoRT", nonPublicInstance);
     static readonly FieldInfo fi_m_GizmosContent = typeSceneView.GetField("m_GizmosContent", nonPublicInstance);
@@ -62,7 +62,18 @@ static class SceneViewHiddenApiExtension {
     const float LeftMargin = 251f;
     const float TopOffset = -1f;
     const float MinGuiContentWidth = 16f;
-    const float RightOffset = 300.0f;
+    const float RightMinOffset = 274.0f;
+    const float RightRenderDocOffset = 26.0f;
+
+    static float RightOffset {
+        get {
+            float o = RightMinOffset;
+            if(RenderDoc.IsLoaded()) {
+                o += RightRenderDocOffset;
+            }
+            return o;
+        }
+    }
 
     // https://github.com/MattRix/UnityDecompiled/blob/753fde37d331b2100f93cc5f9eb343f1dcff5eee/UnityEditor/UnityEditor/SceneView.cs#L810
     //

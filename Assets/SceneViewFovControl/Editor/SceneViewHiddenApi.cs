@@ -7,10 +7,10 @@ using System.Reflection;
 #error This script must be placed under "Editor/" directory.
 #endif
 
-namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
+namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 static class SceneViewHiddenApi {
-    static readonly Type typeSceneView = typeof(global::UnityEditor.SceneView);
+    static readonly Type typeSceneView = typeof(UnityEditor.SceneView);
     static readonly FieldInfo fi_onPreSceneGUIDelegateFieldInfo = typeSceneView.GetField(
         "onPreSceneGUIDelegate"
         , BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
