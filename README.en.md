@@ -16,7 +16,7 @@ With this extension, you will now be able to do this using the Unity Editor's pr
 
 ## How to use
 
-- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.7/SceneViewFovControl.unitypackage) to your Unity project.
+- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.8/SceneViewFovControl.unitypackage) to your Unity project.
     - Import from the file by selecting "Assets > Import Package > Custom Package."
 - You will be able to do the following in Scene View after importing.
 
@@ -30,7 +30,14 @@ With this extension, you will now be able to do this using the Unity Editor's pr
 |Ctrl + Alt + Shift + O				|Increases FoV (high speed, wide angle)			|			|
 |Ctrl + Alt + Shift + P				|Reduces FoV (high speed, narrow angle/telescopic)	|			|
 
-A reset button will appear in the top left of the Scene View if you change the FoV.  Clicking this button will return the Scene View's FoV back to its default.
+You can also right click the `FoV` button to use the following functionalities
+
+|Menu name					|Effect						|Note							|
+|--------------------				|-------------------------			|----							|
+|FoV : Auto (Default behaviour)			|Set FoV mode to "Auto"				|"Auto" means Unity Editor's normal behaviour		|
+|FoV : Manual					|Set FoV mode to "Manual"			|							|
+|Reset Slave Camera				|Reset Slave Camera				|							|
+|Slave Camera submenu				|You can select a camera which follows SceneView|If there're multiple Scene/GameView, you can set them independently	|
 
 
 ## Changing and Saving Settings

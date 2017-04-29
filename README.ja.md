@@ -16,7 +16,7 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 
 ## 使い方
 
-- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.7/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
+- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.8/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
     - ファイルからのインポートは "Assets > Import Package > Custom Package..." から行います
 - インポート後、 シーンビュー (Scene View) 内で以下の操作が可能になります
 
@@ -30,7 +30,14 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 |Ctrl + Alt + Shift + O				|FoV (画角) の増加 (高速、広角)		|			|
 |Ctrl + Alt + Shift + P				|FoV (画角) の減少 (高速、狭角 / 望遠)	|			|
 
-FoV を変更すると、シーンビューの左上に「リセット」ボタンが表示されます。このボタンを押すと、シーンビューの FoV がリセットされます。
+シーンビューツールバー内の `FoV` ボタンを右クリック後、以下のメニュー操作を行うことができます
+
+|メニュー名					|効果						|備考							|
+|--------------------				|-------------------------			|----							|
+|FoV : Auto (Default behaviour)			|FoV 変更モードを「自動」にします		|「自動」とは、Unity Editor の通常の操作のこと		|
+|FoV : Manual					|FoV 変更モードを「自動」にします		|							|
+|Reset Slave Camera				|カメラの追従モードを解除します			|							|
+|Slave Camera サブメニュー			|選択したカメラがシーンビューを追従します	|複数のシーンビューやカメラがある場合、独立設定可能	|
 
 
 ## 設定の変更と保存
