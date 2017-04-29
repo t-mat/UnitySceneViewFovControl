@@ -124,18 +124,6 @@ class Status {
             }
         }
 
-/*
-        var content = ButtonContent;
-        if(autoFov) {
-            content = ButtonContentFovAuto;
-        } else {
-            if(lastOnSceneGuiFov != fov) {
-                lastOnSceneGuiFov = fov;
-                ButtonContentFovUser = new GUIContent(string.Format(ButtonStringFovUser, fov));
-            }
-            content = ButtonContentFovUser;
-        }
-*/
         GUIStyle style = EditorStyles.toolbarDropDown;
         sceneView.DoToolbarRightSideGUI(ButtonContent, style, (rect) => {
             int btn = -1;
