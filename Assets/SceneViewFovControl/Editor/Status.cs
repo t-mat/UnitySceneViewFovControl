@@ -78,7 +78,7 @@ class Status {
         }
 
         if(IsMasterSceneView(sceneView)) {
-            // todo : It should choose a camera which be shown in the "Camera Preview" window in the Scene View.
+            // todo : It should choose a camera which is shown in the "Camera Preview" window in the Scene View.
             if(activeCameras.Length == 0) {
                 var mainCamera = Camera.main;
                 CopyCameraInfo(from: camera, to: mainCamera);
@@ -150,10 +150,12 @@ class Status {
         }
     }
 
+    // This procedure will be called when "FoV" button is left-clcked.
     void OnFovButtonLeftClicked(SceneView sceneView) {
         ToggleAutoFov();
     }
 
+    // This procedure will be called when "FoV" button is right-clcked.
     void OnFovButtonRightClicked(SceneView sceneView) {
         var menu = new GenericMenu();
         //  todo: near/far clip control
@@ -185,10 +187,14 @@ class Status {
                         }
                     }
                 }
-                activeCameraList.Sort(delegate(Camera lhs, Camera rhs) {
-                    return lhs.GetInstanceID() - rhs.GetInstanceID();
-                });
-                newActiveCameras = activeCameraList.ToArray();
+                if(activeCameraList.Count == 0) {
+                    newActiveCameras = new Camera[1] { Camera.main };
+                } else {
+                    activeCameraList.Sort(delegate(Camera lhs, Camera rhs) {
+                        return lhs.GetInstanceID() - rhs.GetInstanceID();
+                    });
+                    newActiveCameras = activeCameraList.ToArray();
+                }
             }
 
             bool activeCamerasAreChanged = false;

@@ -10,7 +10,6 @@ using System.Reflection;
 namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
 static class SceneViewHiddenApi {
-    static bool initialized = false;
     static readonly Type typeSceneView = typeof(global::UnityEditor.SceneView);
     static readonly FieldInfo fi_onPreSceneGUIDelegateFieldInfo = typeSceneView.GetField(
         "onPreSceneGUIDelegate"
