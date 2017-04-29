@@ -11,42 +11,25 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
 static class SceneViewHiddenApi {
     static bool initialized = false;
-    static FieldInfo fi;
-
-    static FieldInfo onPreSceneGUIDelegateFieldInfo {
-        get {
-            if(fi != null || initialized) {
-                return fi;
-            }
-
-            initialized = true;
-
-            // UnityEditor.SceneView.onPreSceneGUIDelegateFieldInfo
-            fi = typeof(SceneView).GetField(
-                "onPreSceneGUIDelegate",
-                  BindingFlags.Static
-                | BindingFlags.NonPublic
-                | BindingFlags.Public
-            );
-            return fi;
-        }
-    }
+    static readonly Type typeSceneView = typeof(global::UnityEditor.SceneView);
+    static readonly FieldInfo fi_onPreSceneGUIDelegateFieldInfo = typeSceneView.GetField(
+        "onPreSceneGUIDelegate"
+        , BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+    );
 
     static SceneView.OnSceneFunc onPreSceneGUIDelegate {
         get {
-            var fi = onPreSceneGUIDelegateFieldInfo;
-            if(fi == null) {
+            if(fi_onPreSceneGUIDelegateFieldInfo == null) {
                 return null;
             }
-            return fi.GetValue(null) as SceneView.OnSceneFunc;
+            return fi_onPreSceneGUIDelegateFieldInfo.GetValue(null) as SceneView.OnSceneFunc;
         }
 
         set {
-            var fi = onPreSceneGUIDelegateFieldInfo;
-            if(fi == null) {
+            if(fi_onPreSceneGUIDelegateFieldInfo == null) {
                 return;
             }
-            fi.SetValue(null, value);
+            fi_onPreSceneGUIDelegateFieldInfo.SetValue(null, value);
         }
     }
 

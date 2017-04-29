@@ -8,10 +8,7 @@ using System;
 
 namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
     static class Settings {
-        static SettingsData data = new SettingsData();
-        static SettingsData loadedData = new SettingsData();
-
-        public const string VersionString = "0.1.7";
+        public const string VersionString = "0.1.8";
         public const string MenuItemName = "Edit/Scene View FoV Settings";
         public const string EditorPrefsKey = "UTJ.UnityEditor.Extension.SceneViewFovControl";
 
@@ -26,27 +23,13 @@ namespace UTJ.UnityEditor.Extension.SceneViewFovControl {
 
         public const string WindowTitle = "FoV Control";
 
-        public static SettingsData Data {
-            get {
-                return data;
-            }
-
-            set {
-                data = value;
-            }
-        }
-
-        public static SettingsData LoadedData {
-            get {
-                return loadedData;
-            }
-
-            set {
-                loadedData = value;
-            }
-        }
+        public static SettingsData Data { get; set; }
+        public static SettingsData LoadedData { get; set; }
 
         static Settings() {
+            Data = new SettingsData();
+            LoadedData = new SettingsData();
+
             Reset();
 
             if(EditorPrefs.HasKey(EditorPrefsKey)) {

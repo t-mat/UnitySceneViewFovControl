@@ -210,11 +210,6 @@ class Status {
             }
         };
     }
-
-//    void Callback(object obj) {
-//        var i = (MenuId) obj;
-//        Debug.LogFormat("Callback = {0}", i);
-//    }
 }
 
 } // namespace
