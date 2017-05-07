@@ -41,10 +41,14 @@ static class SceneViewHiddenApiExtension {
 
     static Rect[] PopGUIClips(this SceneView sceneView) {
         int count = 1;
+#if UNITY_2017_1_OR_NEWER
+        // do nothing
+#else
         if(!sceneView.UseSceneFiltering() && sceneView.SceneCameraRendersIntoRT()) {
             // https://github.com/MattRix/UnityDecompiled/blob/753fde37d331b2100f93cc5f9eb343f1dcff5eee/UnityEditor/UnityEditor/SceneView.cs#L1255
             ++count;
         }
+#endif
         var guiClips = new Rect[count];
         for(int i = 0; i < count; ++i) {
             guiClips[i] = GUIClip.GetTopRect();
