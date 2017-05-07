@@ -57,6 +57,11 @@ Select "Edit" > "Scene View FoV Settings" in the Unity Editor menu to open the s
 |Close				|Closes the window					|
 
 
+## References
+
+- Slave Camera mode is based on [SyncCamera](https://github.com/anchan828/unitejapan2014/tree/master/SyncCamera/Assets) by @anchan828.
+
+
 ## License
 
 [MIT](LICENSE.txt)

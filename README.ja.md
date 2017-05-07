@@ -57,6 +57,11 @@ Unity Editor のメニュー "Edit > Scene View FoV Settings" を選択すると
 |Close				|ウィンドウを閉じる			|
 
 
+## 参照
+
+- シーンビューの追従は @anchan828 氏の [SyncCamera](https://github.com/anchan828/unitejapan2014/tree/master/SyncCamera/Assets) をもとにしています。
+
+
 ## ライセンス
 
 [MIT](LICENSE.txt)
