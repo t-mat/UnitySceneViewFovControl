@@ -16,7 +16,7 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 
 ## 使い方
 
-- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.9/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
+- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.10/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
     - ファイルからのインポートは "Assets > Import Package > Custom Package..." から行います
 - インポート後、 シーンビュー (Scene View) 内で以下の操作が可能になります
 
@@ -55,6 +55,11 @@ Unity Editor のメニュー "Edit > Scene View FoV Settings" を選択すると
 |Restore Default Settings	|デフォルトの設定値読み込み		|
 |Restore Saved Settings		|保存済みの設定値の読み直し		|
 |Close				|ウィンドウを閉じる			|
+
+
+## 動作条件
+
+Unity 5.5 以上で動作します (Unity 5.5, 5.6, 2017.1 での動作を確認)
 
 
 ## 参照

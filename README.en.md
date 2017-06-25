@@ -16,7 +16,7 @@ With this extension, you will now be able to do this using the Unity Editor's pr
 
 ## How to use
 
-- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.9/SceneViewFovControl.unitypackage) to your Unity project.
+- Import [this .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.10/SceneViewFovControl.unitypackage) to your Unity project.
     - Import from the file by selecting "Assets > Import Package > Custom Package."
 - You will be able to do the following in Scene View after importing.
 
@@ -55,6 +55,11 @@ Select "Edit" > "Scene View FoV Settings" in the Unity Editor menu to open the s
 |Restore Default Settings	|Restores the default settings				|
 |Restore Saved Settings		|Restores the saved settings				|
 |Close				|Closes the window					|
+
+
+## Prerequisites
+
+This package needs Unity 5.5 or greater.  I've checked this package with Unity 5.5, 5.6 and 2017.1.
 
 
 ## References
