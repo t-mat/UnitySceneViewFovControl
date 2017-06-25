@@ -8,7 +8,7 @@ using System;
 
 namespace UTJ.UnityEditorExtension.SceneViewFovControl {
     static class Settings {
-        public const string VersionString = "0.1.9";
+        public const string VersionString = "0.1.10";
         public const string MenuItemName = "Edit/Scene View FoV Settings";
         public const string EditorPrefsKey = "UTJ.UnityEditor.Extension.SceneViewFovControl";
 
