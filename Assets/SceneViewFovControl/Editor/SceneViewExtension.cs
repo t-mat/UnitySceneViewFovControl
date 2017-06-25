@@ -41,7 +41,7 @@ static class SceneViewHiddenApiExtension {
 
     static Rect[] PopGUIClips(this SceneView sceneView) {
         int count = 1;
-#if UNITY_2017_1_OR_NEWER
+#if UNITY_5_6_OR_NEWER
         // do nothing
 #else
         if(!sceneView.UseSceneFiltering() && sceneView.SceneCameraRendersIntoRT()) {
