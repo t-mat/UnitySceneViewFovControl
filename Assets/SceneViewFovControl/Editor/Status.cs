@@ -1,5 +1,8 @@
 ﻿// https://github.com/anchan828/unitejapan2014/tree/master/SyncCamera/Assets
 // todo: near/far clip control
+// todo: skybox doesn't follow FoV
+#define SCENE_VIEW_FOV_CONTROL_USE_GUI_BUTTON
+
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -27,7 +30,18 @@ class Status {
     const string ButtonStringFovUserWithSlave = "FoV:{0:0.00}>{1}";
     const string SlaveCameraSubMenu = "Slave Camera/{0}";
 
+#if SCENE_VIEW_FOV_CONTROL_USE_GUI_BUTTON
+    string buttonString = "";
+
+    enum MouseButton {
+        None,
+        Left,
+        Right,
+        Middle
+    }
+#else
     GUIContent ButtonContent = null;
+#endif
 
     public void OnScene(SceneView sceneView) {
         if(sceneView == null
@@ -104,8 +118,12 @@ class Status {
                 previousSlaveCamera = GetSlaveCamera() as System.Object;
                 f = true;
             }
-
-            if(f || ButtonContent == null) {
+#if !SCENE_VIEW_FOV_CONTROL_USE_GUI_BUTTON
+            if(ButtonContent == null) {
+                f = true;
+            }
+#endif
+            if(f) {
                 string s;
                 if(autoFov) {
                     if(HasSlaveCamera()) {
@@ -120,10 +138,36 @@ class Status {
                         s = string.Format(ButtonStringFovUser, fov);
                     }
                 }
+#if SCENE_VIEW_FOV_CONTROL_USE_GUI_BUTTON
+                buttonString = s;
+#else
                 ButtonContent = new GUIContent(s);
+#endif
             }
         }
 
+#if SCENE_VIEW_FOV_CONTROL_USE_GUI_BUTTON
+        MouseButton mouseButton = MouseButton.None;
+        {
+            var e = Event.current;
+            if(e != null && e.type == EventType.MouseUp) {
+                switch(e.button) {
+                default:
+                case 0: mouseButton = MouseButton.Left;     break;
+                case 1: mouseButton = MouseButton.Right;    break;
+                case 2: mouseButton = MouseButton.Middle;   break;
+                }
+            }
+        }
+        GUIStyle style = EditorStyles.miniButton;
+        if (GUI.Button(new Rect(8, 8, 160, 24), buttonString, style)) {
+            switch(mouseButton) {
+            default:                                                    break;
+            case MouseButton.Left:  OnFovButtonLeftClicked(sceneView);  break;
+            case MouseButton.Right: OnFovButtonRightClicked(sceneView); break;
+            }
+        }
+#else
         GUIStyle style = EditorStyles.toolbarDropDown;
         sceneView.DoToolbarRightSideGUI(ButtonContent, style, (rect) => {
             int btn = -1;
@@ -138,6 +182,7 @@ class Status {
                 }
             }
         });
+#endif
     }
 
     void SetAutoFov(bool auto) {
