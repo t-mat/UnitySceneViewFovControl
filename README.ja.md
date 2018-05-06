@@ -16,7 +16,7 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 
 ## 使い方
 
-- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.10/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
+- [この .unitypackage](https://github.com/t-mat/UnitySceneViewFovControl/releases/download/0.1.11/SceneViewFovControl.unitypackage) を Unity プロジェクトにインポートします
     - ファイルからのインポートは "Assets > Import Package > Custom Package..." から行います
 - インポート後、 シーンビュー (Scene View) 内で以下の操作が可能になります
 
