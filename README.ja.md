@@ -36,8 +36,8 @@ Unity Editor のシーンビュー (Scene View) に対する不満の１つと�
 |--------------------				|-------------------------			|----							|
 |FoV : Auto (Default behaviour)			|FoV 変更モードを「自動」にします		|「自動」とは、Unity Editor の通常の操作のこと		|
 |FoV : Manual					|FoV 変更モードを「自動」にします		|							|
-|Reset Slave Camera				|カメラの追従モードを解除します			|							|
-|Slave Camera サブメニュー			|選択したカメラがシーンビューを追従します	|複数のシーンビューやカメラがある場合、独立設定可能	|
+|Reset Follower Camera				|カメラの追従モードを解除します			|							|
+|Follower Camera サブメニュー			|選択したカメラがシーンビューを追従します	|複数のシーンビューやカメラがある場合、独立設定可能	|
 
 
 ## 設定の変更と保存
@@ -59,7 +59,7 @@ Unity Editor のメニュー "Edit > Scene View FoV Settings" を選択すると
 
 ## 動作条件
 
-Unity 5.5 以上で動作します (Unity 5.5, 5.6, 2017.1 での動作を確認)
+Unity 2019.4 以上で動作します (Unity 2019.4, 2020.3, 2021.2, 2022.1b での動作を確認)
 
 
 ## 参照

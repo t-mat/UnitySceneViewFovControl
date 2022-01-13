@@ -7,87 +7,85 @@ using System;
 #endif
 
 namespace UTJ.UnityEditorExtension.SceneViewFovControl {
-    static class Settings {
-        public const string VersionString = "0.1.11";
-        public const string MenuItemName = "Edit/Scene View FoV Settings";
-        public const string EditorPrefsKey = "UTJ.UnityEditor.Extension.SceneViewFovControl";
-
-        public const float FovSpeedMin = 0.01f;
-        public const float FovSpeedMax = 10.0f;
-        public const float FovQuickMultiplierMin = 0.1f;
-        public const float FovQuickMultiplierMax = 20.0f;
-        public const float MinFovMin = 1.0f;
-        public const float MinFovMax = 160.0f;
-        public const float MaxFovMin = 1.0f;
-        public const float MaxFovMax = 160.0f;
+    internal static class Settings {
+        public const string VersionString         = "0.1.12";
+        public const string MenuItemName          = "Edit/Scene View FoV Settings";
+        public const string EditorPrefsKey        = "UTJ.UnityEditor.Extension.SceneViewFovControl";
+        public const float  FovSpeedMin           = 0.01f;
+        public const float  FovSpeedMax           = 10.0f;
+        public const float  FovQuickMultiplierMin = 0.1f;
+        public const float  FovQuickMultiplierMax = 20.0f;
+        public const float  MinFovMin             = 1.0f;
+        public const float  MinFovMax             = 160.0f;
+        public const float  MaxFovMin             = 1.0f;
+        public const float  MaxFovMax             = 160.0f;
 
         public const string WindowTitle = "FoV Control";
 
-        public static SettingsData Data { get; set; }
-        public static SettingsData LoadedData { get; set; }
+        public static SettingsData Data       { get; set; }
+        public static SettingsData LoadedData { get; private set; }
 
-        static Settings() {
-            Data = new SettingsData();
+        static Settings()
+        {
+            Data       = new SettingsData();
             LoadedData = new SettingsData();
 
             Reset();
 
-            if(EditorPrefs.HasKey(EditorPrefsKey)) {
+            if (EditorPrefs.HasKey(EditorPrefsKey)) {
                 LoadedData = Load(EditorPrefsKey);
-                Data = LoadedData.Clone();
+                Data       = LoadedData.Clone();
             }
         }
 
-        public static void Reset() {
-            Data.Reset();
-        }
+        private static void Reset() => Data.Reset();
 
-        public static void Save() {
+        public static void Save()
+        {
             Store(EditorPrefsKey, Data);
             LoadedData = Data.Clone();
         }
 
-        public static SettingsData Load(string key) {
-            var jsonString = EditorPrefs.GetString(key);
+        private static SettingsData Load(string key)
+        {
+            string jsonString = EditorPrefs.GetString(key);
             return JsonUtility.FromJson<SettingsData>(jsonString);
         }
 
-        public static void Store(string key, SettingsData settingsData) {
-            var jsonString = JsonUtility.ToJson(settingsData);
+        private static void Store(string key, SettingsData settingsData)
+        {
+            string jsonString = JsonUtility.ToJson(settingsData);
             EditorPrefs.SetString(key, jsonString);
         }
     }
 
     [Serializable]
     public class SettingsData {
-        public string VersionString;
-        public EventModifiers ModifiersNormal;
-        public EventModifiers ModifiersQuick;
+        public string         versionString;
+        public EventModifiers modifiersNormal;
+        public EventModifiers modifiersQuick;
+        public KeyCode        keyCodeIncreaseFov;
+        public KeyCode        keyCodeDecreaseFov;
+        public float          fovSpeed;
+        public float          fovQuickMultiplier;
+        public float          minFov;
+        public float          maxFov;
 
-        public KeyCode KeyCodeIncreaseFov;
-        public KeyCode KeyCodeDecreaseFov;
+        public SettingsData Clone() => (SettingsData)MemberwiseClone();
 
-        public float FovSpeed;
-        public float FovQuickMultiplier;
-        public float MinFov;
-        public float MaxFov;
+        public void Reset()
+        {
+            versionString   = Settings.VersionString;
+            modifiersNormal = EventModifiers.Alt | EventModifiers.Control;
+            modifiersQuick  = EventModifiers.Alt | EventModifiers.Control | EventModifiers.Shift;
 
-        public SettingsData Clone() {
-            return (SettingsData) this.MemberwiseClone();
-        }
+            keyCodeIncreaseFov = KeyCode.O;
+            keyCodeDecreaseFov = KeyCode.P;
 
-        public void Reset() {
-            VersionString = Settings.VersionString;
-            ModifiersNormal = EventModifiers.Alt | EventModifiers.Control;
-            ModifiersQuick  = EventModifiers.Alt | EventModifiers.Control | EventModifiers.Shift;
-
-            KeyCodeIncreaseFov = KeyCode.O;
-            KeyCodeDecreaseFov = KeyCode.P;
-
-            FovSpeed = 0.15f;
-            FovQuickMultiplier = 5.0f;
-            MinFov = 2.0f;
-            MaxFov = 160.0f;
+            fovSpeed           = 0.15f;
+            fovQuickMultiplier = 5.0f;
+            minFov             = 2.0f;
+            maxFov             = 160.0f;
         }
     }
 }

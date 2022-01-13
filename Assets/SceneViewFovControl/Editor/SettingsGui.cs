@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using System;
 
 #if !UNITY_EDITOR
 #error This script must be placed under "Editor/" directory.
@@ -9,18 +8,18 @@ using System;
 namespace UTJ.UnityEditorExtension.SceneViewFovControl {
 
 [InitializeOnLoad]
-class SettingsGui : EditorWindow {
-    static SettingsGui settingGui;
+internal class SettingsGui : EditorWindow {
+    private static SettingsGui _settingGui;
 
     [MenuItem(Settings.MenuItemName)]
-    static void Open() {
-        if(settingGui == null) {
-            settingGui = EditorWindow.GetWindow<SettingsGui>(false, Settings.WindowTitle);
+    private static void Open() {
+        if(_settingGui == null) {
+            _settingGui = GetWindow<SettingsGui>(false, Settings.WindowTitle);
         }
     }
 
-    void OnGUI() {
-        var d = Settings.Data;
+    private void OnGUI() {
+        SettingsData d = Settings.Data;
 
         GUILayout.Space(4);
 
@@ -28,41 +27,41 @@ class SettingsGui : EditorWindow {
 
         GUILayout.Space(8);
 
-        GUILayout.Label("FoV Speed:" + d.FovSpeed);
-        d.FovSpeed = GUILayout.HorizontalSlider(d.FovSpeed, Settings.FovSpeedMin, Settings.FovSpeedMax);
+        GUILayout.Label("FoV Speed:" + d.fovSpeed);
+        d.fovSpeed = GUILayout.HorizontalSlider(d.fovSpeed, Settings.FovSpeedMin, Settings.FovSpeedMax);
 
         GUILayout.Space(8);
 
-        GUILayout.Label("FoV <Shift> Modifier Multiplier:" + d.FovQuickMultiplier);
-        d.FovQuickMultiplier = GUILayout.HorizontalSlider(d.FovQuickMultiplier, Settings.FovQuickMultiplierMin, Settings.FovQuickMultiplierMax);
+        GUILayout.Label("FoV <Shift> Modifier Multiplier:" + d.fovQuickMultiplier);
+        d.fovQuickMultiplier = GUILayout.HorizontalSlider(d.fovQuickMultiplier, Settings.FovQuickMultiplierMin, Settings.FovQuickMultiplierMax);
 
         GUILayout.Space(8);
 
-        GUILayout.Label("Min FoV:" + d.MinFov);
-        d.MinFov = GUILayout.HorizontalSlider(d.MinFov, Settings.MinFovMin, Settings.MinFovMax);
+        GUILayout.Label("Min FoV:" + d.minFov);
+        d.minFov = GUILayout.HorizontalSlider(d.minFov, Settings.MinFovMin, Settings.MinFovMax);
 
-        if(d.MinFov > d.MaxFov) {
-            d.MaxFov = d.MinFov;
+        if(d.minFov > d.maxFov) {
+            d.maxFov = d.minFov;
         }
 
         GUILayout.Space(8);
 
-        GUILayout.Label("Max FoV:" + d.MaxFov);
-        d.MaxFov = GUILayout.HorizontalSlider(d.MaxFov, Settings.MaxFovMin, Settings.MaxFovMax);
+        GUILayout.Label("Max FoV:" + d.maxFov);
+        d.maxFov = GUILayout.HorizontalSlider(d.maxFov, Settings.MaxFovMin, Settings.MaxFovMax);
 
-        if(d.MaxFov < d.MinFov) {
-            d.MinFov = d.MaxFov;
+        if(d.maxFov < d.minFov) {
+            d.minFov = d.maxFov;
         }
 
         GUILayout.Space(8);
 
-        if(d.MaxFov < d.MinFov) {
-            d.MinFov = d.MaxFov;
+        if(d.maxFov < d.minFov) {
+            d.minFov = d.maxFov;
         }
 
         GUILayout.Space(20);
 
-        UnityEditor.EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.BeginHorizontal();
         {
             if(GUILayout.Button("Save")) {
                 Settings.Save();
@@ -84,10 +83,10 @@ class SettingsGui : EditorWindow {
             GUILayout.Space(20);
 
             if(GUILayout.Button("Close")) {
-                this.Close();
+                Close();
             }
         }
-        UnityEditor.EditorGUILayout.EndHorizontal();
+        EditorGUILayout.EndHorizontal();
     }
 }
 

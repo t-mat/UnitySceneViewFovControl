@@ -36,8 +36,8 @@ You can also right click the `FoV` button to use the following functionalities
 |--------------------				|-------------------------			|----							|
 |FoV : Auto (Default behaviour)			|Set FoV mode to "Auto"				|"Auto" means Unity Editor's normal behaviour		|
 |FoV : Manual					|Set FoV mode to "Manual"			|							|
-|Reset Slave Camera				|Reset Slave Camera				|							|
-|Slave Camera submenu				|You can select a camera which follows SceneView|If there're multiple Scene/GameView, you can set them independently	|
+|Reset Follower Camera				|Reset Follower Camera				|							|
+|Follower Camera submenu			|You can select a camera which follows SceneView|If there're multiple Scene/GameView, you can set them independently	|
 
 
 ## Changing and Saving Settings
@@ -59,12 +59,12 @@ Select "Edit" > "Scene View FoV Settings" in the Unity Editor menu to open the s
 
 ## Prerequisites
 
-This package needs Unity 5.5 or greater.  I've checked this package with Unity 5.5, 5.6 and 2017.1.
+This package needs Unity 2019 or greater.  I've checked this package with Unity 2019.4, 2020.3, 2021.2 and 2022.1b.
 
 
 ## References
 
-- Slave Camera mode is based on [SyncCamera](https://github.com/anchan828/unitejapan2014/tree/master/SyncCamera/Assets) by @anchan828.
+- Follower Camera mode is based on [SyncCamera](https://github.com/anchan828/unitejapan2014/tree/master/SyncCamera/Assets) by @anchan828.
 
 
 ## License
